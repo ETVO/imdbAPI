@@ -12,6 +12,11 @@ function tryItOut(e) {
     $('#get').click();
 } 
 
+$("#openURL").click(() => {
+    $("#url").val() != "" ? window.open($("#url").val(), "_blank") : ''; 
+    return false;
+});
+
 function doCORSRequest(options, getResult) {
     var x = new XMLHttpRequest();
     x.open(options.method, cors_api_url + options.url);
@@ -43,6 +48,7 @@ function doCORSRequest(options, getResult) {
     var urlField = document.getElementById('url');
     var titleField = document.getElementById('title');
     var outputField = document.getElementById('output');
+
     document.getElementById('get').onclick = function (e) {
 
         if (titleField.value !== "") {
@@ -197,7 +203,7 @@ function urlify(text) {
 }
 
 function getAPIURL(title) {
-    var name = title.trim().normalize("NFKD").replaceAll(/[^\w\s]/gi, '').replaceAll(' ', '-').toLowerCase();
+    var name = title.trim().normalize("NFKD").replaceAll(/[^\-\w\s]/gi, '').replaceAll(' ', '-').toLowerCase();
 
     var url = imdb_api_url + name[0] + "/" + name + ".json";
 
